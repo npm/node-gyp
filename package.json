@@ -24,6 +24,7 @@
     "coverage-map": "map.js"
   },
   "devDependencies": {
+    "require-inject": "^1.4.4",
     "tap": "^14.10.6",
     "tmp": "^0.2.1"
   }
