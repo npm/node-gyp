@@ -31,8 +31,8 @@ test('VS2013', function (t) {
   t.plan(4)
 
   const finder = new TestVisualStudioFinder(semverV1, null, (err, info) => {
-    t.strictEqual(err, null)
-    t.deepEqual(info, {
+    t.equal(err, null)
+    t.same(info, {
       msBuild: 'C:\\MSBuild12\\MSBuild.exe',
       path: 'C:\\VS2013',
       sdk: null,
@@ -78,7 +78,7 @@ test('VS2013 should not be found on new node versions', function (t) {
     patch: 0
   }, null, (err, info) => {
     t.ok(/find .* Visual Studio/i.test(err), 'expect error')
-    t.false(info, 'no data')
+    t.notOk(info, 'no data')
   })
 
   finder.findVisualStudio2017OrNewer = (cb) => {
@@ -106,8 +106,8 @@ test('VS2015', function (t) {
   t.plan(4)
 
   const finder = new TestVisualStudioFinder(semverV1, null, (err, info) => {
-    t.strictEqual(err, null)
-    t.deepEqual(info, {
+    t.equal(err, null)
+    t.same(info, {
       msBuild: 'C:\\MSBuild14\\MSBuild.exe',
       path: 'C:\\VS2015',
       sdk: null,
@@ -148,7 +148,7 @@ test('error from PowerShell', function (t) {
 
   finder.parseData(new Error(), '', '', (info) => {
     t.ok(/use PowerShell/i.test(finder.errorLog[0]), 'expect error')
-    t.false(info, 'no data')
+    t.notOk(info, 'no data')
   })
 })
 
@@ -159,7 +159,7 @@ test('empty output from PowerShell', function (t) {
 
   finder.parseData(null, '', '', (info) => {
     t.ok(/use PowerShell/i.test(finder.errorLog[0]), 'expect error')
-    t.false(info, 'no data')
+    t.notOk(info, 'no data')
   })
 })
 
@@ -170,7 +170,7 @@ test('output from PowerShell not JSON', function (t) {
 
   finder.parseData(null, 'AAAABBBB', '', (info) => {
     t.ok(/use PowerShell/i.test(finder.errorLog[0]), 'expect error')
-    t.false(info, 'no data')
+    t.notOk(info, 'no data')
   })
 })
 
@@ -181,7 +181,7 @@ test('wrong JSON from PowerShell', function (t) {
 
   finder.parseData(null, '{}', '', (info) => {
     t.ok(/use PowerShell/i.test(finder.errorLog[0]), 'expect error')
-    t.false(info, 'no data')
+    t.notOk(info, 'no data')
   })
 })
 
@@ -192,7 +192,7 @@ test('empty JSON from PowerShell', function (t) {
 
   finder.parseData(null, '[]', '', (info) => {
     t.ok(/find .* Visual Studio/i.test(finder.errorLog[0]), 'expect error')
-    t.false(info, 'no data')
+    t.notOk(info, 'no data')
   })
 })
 
@@ -212,7 +212,7 @@ test('future version', function (t) {
   }]), '', (info) => {
     t.ok(/unknown version/i.test(finder.errorLog[0]), 'expect error')
     t.ok(/find .* Visual Studio/i.test(finder.errorLog[1]), 'expect error')
-    t.false(info, 'no data')
+    t.notOk(info, 'no data')
   })
 })
 
@@ -226,7 +226,7 @@ test('single unusable VS2017', function (t) {
   finder.parseData(null, data, '', (info) => {
     t.ok(/checking/i.test(finder.errorLog[0]), 'expect error')
     t.ok(/find .* Visual Studio/i.test(finder.errorLog[2]), 'expect error')
-    t.false(info, 'no data')
+    t.notOk(info, 'no data')
   })
 })
 
@@ -234,8 +234,8 @@ test('minimal VS2017 Build Tools', function (t) {
   t.plan(2)
 
   const finder = new TestVisualStudioFinder(semverV1, null, (err, info) => {
-    t.strictEqual(err, null)
-    t.deepEqual(info, {
+    t.equal(err, null)
+    t.same(info, {
       msBuild: 'C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\' +
         'BuildTools\\MSBuild\\15.0\\Bin\\MSBuild.exe',
       path:
@@ -263,8 +263,8 @@ test('VS2017 Community with C++ workload', function (t) {
   t.plan(2)
 
   const finder = new TestVisualStudioFinder(semverV1, null, (err, info) => {
-    t.strictEqual(err, null)
-    t.deepEqual(info, {
+    t.equal(err, null)
+    t.same(info, {
       msBuild: 'C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\' +
         'Community\\MSBuild\\15.0\\Bin\\MSBuild.exe',
       path:
@@ -292,8 +292,8 @@ test('VS2017 Express', function (t) {
   t.plan(2)
 
   const finder = new TestVisualStudioFinder(semverV1, null, (err, info) => {
-    t.strictEqual(err, null)
-    t.deepEqual(info, {
+    t.equal(err, null)
+    t.same(info, {
       msBuild: 'C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\' +
         'WDExpress\\MSBuild\\15.0\\Bin\\MSBuild.exe',
       path:
@@ -320,8 +320,8 @@ test('VS2019 Preview with C++ workload', function (t) {
   t.plan(2)
 
   const finder = new TestVisualStudioFinder(semverV1, null, (err, info) => {
-    t.strictEqual(err, null)
-    t.deepEqual(info, {
+    t.equal(err, null)
+    t.same(info, {
       msBuild: 'C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\' +
         'Preview\\MSBuild\\Current\\Bin\\MSBuild.exe',
       path:
@@ -349,8 +349,8 @@ test('minimal VS2019 Build Tools', function (t) {
   t.plan(2)
 
   const finder = new TestVisualStudioFinder(semverV1, null, (err, info) => {
-    t.strictEqual(err, null)
-    t.deepEqual(info, {
+    t.equal(err, null)
+    t.same(info, {
       msBuild: 'C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\' +
         'BuildTools\\MSBuild\\Current\\Bin\\MSBuild.exe',
       path:
@@ -378,8 +378,8 @@ test('VS2019 Community with C++ workload', function (t) {
   t.plan(2)
 
   const finder = new TestVisualStudioFinder(semverV1, null, (err, info) => {
-    t.strictEqual(err, null)
-    t.deepEqual(info, {
+    t.equal(err, null)
+    t.same(info, {
       msBuild: 'C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\' +
         'Community\\MSBuild\\Current\\Bin\\MSBuild.exe',
       path:
@@ -451,7 +451,7 @@ test('fail when looking for invalid path', function (t) {
 
   const finder = new TestVisualStudioFinder(semverV1, 'AABB', (err, info) => {
     t.ok(/find .* Visual Studio/i.test(err), 'expect error')
-    t.false(info, 'no data')
+    t.notOk(info, 'no data')
   })
 
   allVsVersions(t, finder)
@@ -462,8 +462,8 @@ test('look for VS2013 by version number', function (t) {
   t.plan(2)
 
   const finder = new TestVisualStudioFinder(semverV1, '2013', (err, info) => {
-    t.strictEqual(err, null)
-    t.deepEqual(info.versionYear, 2013)
+    t.equal(err, null)
+    t.same(info.versionYear, 2013)
   })
 
   allVsVersions(t, finder)
@@ -475,8 +475,8 @@ test('look for VS2013 by installation path', function (t) {
 
   const finder = new TestVisualStudioFinder(semverV1, 'C:\\VS2013',
     (err, info) => {
-      t.strictEqual(err, null)
-      t.deepEqual(info.path, 'C:\\VS2013')
+      t.equal(err, null)
+      t.same(info.path, 'C:\\VS2013')
     })
 
   allVsVersions(t, finder)
@@ -487,8 +487,8 @@ test('look for VS2015 by version number', function (t) {
   t.plan(2)
 
   const finder = new TestVisualStudioFinder(semverV1, '2015', (err, info) => {
-    t.strictEqual(err, null)
-    t.deepEqual(info.versionYear, 2015)
+    t.equal(err, null)
+    t.same(info.versionYear, 2015)
   })
 
   allVsVersions(t, finder)
@@ -500,8 +500,8 @@ test('look for VS2015 by installation path', function (t) {
 
   const finder = new TestVisualStudioFinder(semverV1, 'C:\\VS2015',
     (err, info) => {
-      t.strictEqual(err, null)
-      t.deepEqual(info.path, 'C:\\VS2015')
+      t.equal(err, null)
+      t.same(info.path, 'C:\\VS2015')
     })
 
   allVsVersions(t, finder)
@@ -512,8 +512,8 @@ test('look for VS2017 by version number', function (t) {
   t.plan(2)
 
   const finder = new TestVisualStudioFinder(semverV1, '2017', (err, info) => {
-    t.strictEqual(err, null)
-    t.deepEqual(info.versionYear, 2017)
+    t.equal(err, null)
+    t.same(info.versionYear, 2017)
   })
 
   allVsVersions(t, finder)
@@ -526,8 +526,8 @@ test('look for VS2017 by installation path', function (t) {
   const finder = new TestVisualStudioFinder(semverV1,
     'C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Community',
     (err, info) => {
-      t.strictEqual(err, null)
-      t.deepEqual(info.path,
+      t.equal(err, null)
+      t.same(info.path,
         'C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Community')
     })
 
@@ -539,8 +539,8 @@ test('look for VS2019 by version number', function (t) {
   t.plan(2)
 
   const finder = new TestVisualStudioFinder(semverV1, '2019', (err, info) => {
-    t.strictEqual(err, null)
-    t.deepEqual(info.versionYear, 2019)
+    t.equal(err, null)
+    t.same(info.versionYear, 2019)
   })
 
   allVsVersions(t, finder)
@@ -553,8 +553,8 @@ test('look for VS2019 by installation path', function (t) {
   const finder = new TestVisualStudioFinder(semverV1,
     'C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\BuildTools',
     (err, info) => {
-      t.strictEqual(err, null)
-      t.deepEqual(info.path,
+      t.equal(err, null)
+      t.same(info.path,
         'C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\BuildTools')
     })
 
@@ -568,8 +568,8 @@ test('msvs_version match should be case insensitive', function (t) {
   const finder = new TestVisualStudioFinder(semverV1,
     'c:\\program files (x86)\\microsoft visual studio\\2019\\BUILDTOOLS',
     (err, info) => {
-      t.strictEqual(err, null)
-      t.deepEqual(info.path,
+      t.equal(err, null)
+      t.same(info.path,
         'C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\BuildTools')
     })
 
@@ -581,8 +581,8 @@ test('latest version should be found by default', function (t) {
   t.plan(2)
 
   const finder = new TestVisualStudioFinder(semverV1, null, (err, info) => {
-    t.strictEqual(err, null)
-    t.deepEqual(info.versionYear, 2019)
+    t.equal(err, null)
+    t.same(info.versionYear, 2019)
   })
 
   allVsVersions(t, finder)
@@ -597,8 +597,8 @@ test('run on a usable VS Command Prompt', function (t) {
   delete process.env.VSINSTALLDIR
 
   const finder = new TestVisualStudioFinder(semverV1, null, (err, info) => {
-    t.strictEqual(err, null)
-    t.deepEqual(info.path, 'C:\\VS2015')
+    t.equal(err, null)
+    t.same(info.path, 'C:\\VS2015')
   })
 
   allVsVersions(t, finder)
@@ -612,8 +612,8 @@ test('VCINSTALLDIR match should be case insensitive', function (t) {
     'c:\\program files (x86)\\microsoft visual studio\\2019\\BUILDTOOLS\\VC'
 
   const finder = new TestVisualStudioFinder(semverV1, null, (err, info) => {
-    t.strictEqual(err, null)
-    t.deepEqual(info.path,
+    t.equal(err, null)
+    t.same(info.path,
       'C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\BuildTools')
   })
 
@@ -629,7 +629,7 @@ test('run on a unusable VS Command Prompt', function (t) {
 
   const finder = new TestVisualStudioFinder(semverV1, null, (err, info) => {
     t.ok(/find .* Visual Studio/i.test(err), 'expect error')
-    t.false(info, 'no data')
+    t.notOk(info, 'no data')
   })
 
   allVsVersions(t, finder)
@@ -643,8 +643,8 @@ test('run on a VS Command Prompt with matching msvs_version', function (t) {
 
   const finder = new TestVisualStudioFinder(semverV1, 'C:\\VS2015',
     (err, info) => {
-      t.strictEqual(err, null)
-      t.deepEqual(info.path, 'C:\\VS2015')
+      t.equal(err, null)
+      t.same(info.path, 'C:\\VS2015')
     })
 
   allVsVersions(t, finder)
@@ -660,7 +660,7 @@ test('run on a VS Command Prompt with mismatched msvs_version', function (t) {
   const finder = new TestVisualStudioFinder(semverV1, 'C:\\VS2015',
     (err, info) => {
       t.ok(/find .* Visual Studio/i.test(err), 'expect error')
-      t.false(info, 'no data')
+      t.notOk(info, 'no data')
     })
 
   allVsVersions(t, finder)

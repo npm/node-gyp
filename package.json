@@ -36,15 +36,24 @@
   "engines": {
     "node": "^14.17.0 || ^16.13.0 || >=18.0.0"
   },
+  "tap": {
+    "statements": 75,
+    "branches": 62,
+    "functions": 80,
+    "lines": 75,
+    "jobs": 1,
+    "timeout": 600,
+    "test-ignore": "(fixtures|node_modules)/"
+  },
   "devDependencies": {
     "bindings": "^1.5.0",
     "nan": "^2.14.2",
     "require-inject": "^1.4.4",
     "standard": "^17.0.0",
-    "tap": "^12.7.0"
+    "tap": "^16.3.2"
   },
   "scripts": {
     "lint": "standard */*.js test/**/*.js",
-    "test": "npm run lint && tap --timeout=600 test/test-*"
+    "test": "npm run lint && tap"
   }
 }

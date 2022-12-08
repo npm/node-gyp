@@ -8,7 +8,7 @@ const http = require('http')
 const https = require('https')
 const install = require('../lib/install')
 const semver = require('semver')
-const devDir = require('./common').devDir()
+const devDir = require('./fixtures/common').devDir()
 const rimraf = require('rimraf')
 const gyp = require('../lib/node-gyp')
 const log = require('../lib/log')
@@ -20,11 +20,11 @@ test('download over http', async (t) => {
   t.plan(2)
 
   const server = http.createServer((req, res) => {
-    t.strictEqual(req.headers['user-agent'], `node-gyp v42 (node ${process.version})`)
+    t.equal(req.headers['user-agent'], `node-gyp v42 (node ${process.version})`)
     res.end('ok')
   })
 
-  t.tearDown(() => new Promise((resolve) => server.close(resolve)))
+  t.teardown(() => new Promise((resolve) => server.close(resolve)))
 
   const host = 'localhost'
   await new Promise((resolve) => server.listen(0, host, resolve))
@@ -35,7 +35,7 @@ test('download over http', async (t) => {
   }
   const url = `http://${host}:${port}`
   const res = await install.test.download(gyp, url)
-  t.strictEqual(await res.text(), 'ok')
+  t.equal(await res.text(), 'ok')
 })
 
 test('download over https with custom ca', async (t) => {
@@ -48,15 +48,15 @@ test('download over https with custom ca', async (t) => {
   await fs.promises.writeFile(cafile, cacontents, 'utf8')
   const ca = await install.test.readCAFile(cafile)
 
-  t.strictEqual(ca.length, 1)
+  t.equal(ca.length, 1)
 
   const options = { ca, cert, key }
   const server = https.createServer(options, (req, res) => {
-    t.strictEqual(req.headers['user-agent'], `node-gyp v42 (node ${process.version})`)
+    t.equal(req.headers['user-agent'], `node-gyp v42 (node ${process.version})`)
     res.end('ok')
   })
 
-  t.tearDown(async () => {
+  t.teardown(async () => {
     await new Promise((resolve) => server.close(resolve))
     await fs.promises.unlink(cafile)
   })
@@ -72,7 +72,7 @@ test('download over https with custom ca', async (t) => {
   }
   const url = `https://${host}:${port}`
   const res = await install.test.download(gyp, url)
-  t.strictEqual(await res.text(), 'ok')
+  t.equal(await res.text(), 'ok')
 })
 
 test('download over http with proxy', async (t) => {
@@ -83,11 +83,11 @@ test('download over http with proxy', async (t) => {
   })
 
   const pserver = http.createServer((req, res) => {
-    t.strictEqual(req.headers['user-agent'], `node-gyp v42 (node ${process.version})`)
+    t.equal(req.headers['user-agent'], `node-gyp v42 (node ${process.version})`)
     res.end('proxy ok')
   })
 
-  t.tearDown(() => Promise.all([
+  t.teardown(() => Promise.all([
     new Promise((resolve) => server.close(resolve)),
     new Promise((resolve) => pserver.close(resolve))
   ]))
@@ -105,14 +105,14 @@ test('download over http with proxy', async (t) => {
   }
   const url = `http://${host}:${port}`
   const res = await install.test.download(gyp, url)
-  t.strictEqual(await res.text(), 'proxy ok')
+  t.equal(await res.text(), 'proxy ok')
 })
 
 test('download over http with noproxy', async (t) => {
   t.plan(2)
 
   const server = http.createServer((req, res) => {
-    t.strictEqual(req.headers['user-agent'], `node-gyp v42 (node ${process.version})`)
+    t.equal(req.headers['user-agent'], `node-gyp v42 (node ${process.version})`)
     res.end('ok')
   })
 
@@ -120,7 +120,7 @@ test('download over http with noproxy', async (t) => {
     res.end('proxy ok')
   })
 
-  t.tearDown(() => Promise.all([
+  t.teardown(() => Promise.all([
     new Promise((resolve) => server.close(resolve)),
     new Promise((resolve) => pserver.close(resolve))
   ]))
@@ -138,7 +138,7 @@ test('download over http with noproxy', async (t) => {
   }
   const url = `http://${host}:${port}`
   const res = await install.test.download(gyp, url)
-  t.strictEqual(await res.text(), 'ok')
+  t.equal(await res.text(), 'ok')
 })
 
 test('download with missing cafile', async (t) => {
@@ -157,13 +157,13 @@ test('check certificate splitting', async (t) => {
   const cafile = path.join(__dirname, 'fixtures/ca-bundle.crt')
   const cacontents = certs['ca-bundle.crt']
   await fs.promises.writeFile(cafile, cacontents, 'utf8')
-  t.tearDown(async () => {
+  t.teardown(async () => {
     await fs.promises.unlink(cafile)
   })
   const cas = await install.test.readCAFile(path.join(__dirname, 'fixtures/ca-bundle.crt'))
   t.plan(2)
-  t.strictEqual(cas.length, 2)
-  t.notStrictEqual(cas[0], cas[1])
+  t.equal(cas.length, 2)
+  t.not(cas[0], cas[1])
 })
 
 // only run this test if we are running a version of Node with predictable version path behavior
@@ -187,7 +187,7 @@ test('download headers (actual)', async (t) => {
   await util.promisify(install)(prog, [])
 
   const data = await fs.promises.readFile(path.join(expectedDir, 'installVersion'), 'utf8')
-  t.strictEqual(data, '9\n', 'correct installVersion')
+  t.equal(data, '9\n', 'correct installVersion')
 
   const list = await fs.promises.readdir(path.join(expectedDir, 'include/node'))
   t.ok(list.includes('common.gypi'))
@@ -212,5 +212,5 @@ test('download headers (actual)', async (t) => {
     return `${version}${type !== 'major' ? '.' : 'v'}${i}`
   }, '')
 
-  t.strictEqual(version, process.version)
+  t.equal(version, process.version)
 })

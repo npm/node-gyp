@@ -27,7 +27,7 @@ test('options in environment', (t) => {
   const g = gyp()
   g.parseArgv(['rebuild']) // Also sets opts.argv.
 
-  t.deepEqual(Object.keys(g.opts).sort(), keys.sort())
+  t.same(Object.keys(g.opts).sort(), keys.sort())
 })
 
 test('options with spaces in environment', (t) => {

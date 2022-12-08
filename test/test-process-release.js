@@ -11,7 +11,7 @@ test('test process release - process.version = 0.8.20', function (t) {
   t.equal(release.semver.version, '0.8.20')
   delete release.semver
 
-  t.deepEqual(release, {
+  t.same(release, {
     version: '0.8.20',
     name: 'node',
     baseUrl: 'https://nodejs.org/dist/v0.8.20/',
@@ -32,7 +32,7 @@ test('test process release - process.version = 0.10.21', function (t) {
   t.equal(release.semver.version, '0.10.21')
   delete release.semver
 
-  t.deepEqual(release, {
+  t.same(release, {
     version: '0.10.21',
     name: 'node',
     baseUrl: 'https://nodejs.org/dist/v0.10.21/',
@@ -54,7 +54,7 @@ test('test process release - process.version = 0.12.9', function (t) {
   t.equal(release.semver.version, '0.12.9')
   delete release.semver
 
-  t.deepEqual(release, {
+  t.same(release, {
     version: '0.12.9',
     name: 'node',
     baseUrl: 'https://nodejs.org/dist/v0.12.9/',
@@ -76,7 +76,7 @@ test('test process release - process.version = 0.10.41', function (t) {
   t.equal(release.semver.version, '0.10.41')
   delete release.semver
 
-  t.deepEqual(release, {
+  t.same(release, {
     version: '0.10.41',
     name: 'node',
     baseUrl: 'https://nodejs.org/dist/v0.10.41/',
@@ -98,7 +98,7 @@ test('test process release - process.release ~ node@0.10.42', function (t) {
   t.equal(release.semver.version, '0.10.42')
   delete release.semver
 
-  t.deepEqual(release, {
+  t.same(release, {
     version: '0.10.42',
     name: 'node',
     baseUrl: 'https://nodejs.org/dist/v0.10.42/',
@@ -120,7 +120,7 @@ test('test process release - process.release ~ node@0.12.10', function (t) {
   t.equal(release.semver.version, '0.12.10')
   delete release.semver
 
-  t.deepEqual(release, {
+  t.same(release, {
     version: '0.12.10',
     name: 'node',
     baseUrl: 'https://nodejs.org/dist/v0.12.10/',
@@ -144,7 +144,7 @@ test('test process release - process.release ~ node@4.1.23', function (t) {
   t.equal(release.semver.version, '4.1.23')
   delete release.semver
 
-  t.deepEqual(release, {
+  t.same(release, {
     version: '4.1.23',
     name: 'node',
     baseUrl: 'https://nodejs.org/dist/v4.1.23/',
@@ -168,7 +168,7 @@ test('test process release - process.release ~ node@4.1.23 / corp build', functi
   t.equal(release.semver.version, '4.1.23')
   delete release.semver
 
-  t.deepEqual(release, {
+  t.same(release, {
     version: '4.1.23',
     name: 'node',
     baseUrl: 'https://some.custom.location/',
@@ -194,7 +194,7 @@ test('test process release - process.release ~ node@12.8.0 Windows', function (t
   t.equal(release.semver.version, '12.8.0')
   delete release.semver
 
-  t.deepEqual(release, {
+  t.same(release, {
     version: '12.8.0',
     name: 'node',
     baseUrl: 'https://nodejs.org/download/release/v12.8.0/',
@@ -220,7 +220,7 @@ test('test process release - process.release ~ node@12.8.0 Windows ARM64', funct
   t.equal(release.semver.version, '12.8.0')
   delete release.semver
 
-  t.deepEqual(release, {
+  t.same(release, {
     version: '12.8.0',
     name: 'node',
     baseUrl: 'https://unofficial-builds.nodejs.org/download/release/v12.8.0/',
@@ -244,7 +244,7 @@ test('test process release - process.release ~ node@4.1.23 --target=0.10.40', fu
   t.equal(release.semver.version, '0.10.40')
   delete release.semver
 
-  t.deepEqual(release, {
+  t.same(release, {
     version: '0.10.40',
     name: 'node',
     baseUrl: 'https://nodejs.org/dist/v0.10.40/',
@@ -268,7 +268,7 @@ test('test process release - process.release ~ node@4.1.23 --dist-url=https://fo
   t.equal(release.semver.version, '4.1.23')
   delete release.semver
 
-  t.deepEqual(release, {
+  t.same(release, {
     version: '4.1.23',
     name: 'node',
     baseUrl: 'https://foo.bar/baz/v4.1.23/',
@@ -292,7 +292,7 @@ test('test process release - process.release ~ frankenstein@4.1.23', function (t
   t.equal(release.semver.version, '4.1.23')
   delete release.semver
 
-  t.deepEqual(release, {
+  t.same(release, {
     version: '4.1.23',
     name: 'frankenstein',
     baseUrl: 'https://frankensteinjs.org/dist/v4.1.23/',
@@ -316,7 +316,7 @@ test('test process release - process.release ~ frankenstein@4.1.23 --dist-url=ht
   t.equal(release.semver.version, '4.1.23')
   delete release.semver
 
-  t.deepEqual(release, {
+  t.same(release, {
     version: '4.1.23',
     name: 'frankenstein',
     baseUrl: 'http://foo.bar/baz/v4.1.23/',
@@ -340,7 +340,7 @@ test('test process release - process.release ~ node@4.0.0-rc.4', function (t) {
   t.equal(release.semver.version, '4.0.0-rc.4')
   delete release.semver
 
-  t.deepEqual(release, {
+  t.same(release, {
     version: '4.0.0-rc.4',
     name: 'node',
     baseUrl: 'https://nodejs.org/download/rc/v4.0.0-rc.4/',
@@ -366,7 +366,7 @@ test('test process release - process.release ~ node@4.0.0-rc.4 passed as argv[0]
   t.equal(release.semver.version, '4.0.0-rc.4')
   delete release.semver
 
-  t.deepEqual(release, {
+  t.same(release, {
     version: '4.0.0-rc.4',
     name: 'node',
     baseUrl: 'https://nodejs.org/download/rc/v4.0.0-rc.4/',
@@ -392,7 +392,7 @@ test('test process release - process.release ~ node@4.0.0-rc.4 - bogus string pa
   t.equal(release.semver.version, '4.0.0-rc.4')
   delete release.semver
 
-  t.deepEqual(release, {
+  t.same(release, {
     version: '4.0.0-rc.4',
     name: 'node',
     baseUrl: 'https://nodejs.org/download/rc/v4.0.0-rc.4/',
@@ -418,7 +418,7 @@ test('test process release - NODEJS_ORG_MIRROR', function (t) {
   t.equal(release.semver.version, '4.1.23')
   delete release.semver
 
-  t.deepEqual(release, {
+  t.same(release, {
     version: '4.1.23',
     name: 'node',
     baseUrl: 'http://foo.bar/v4.1.23/',

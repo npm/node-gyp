@@ -32,7 +32,7 @@ test('find accessible - empty array', function (t) {
 
   const candidates = []
   const found = configure.test.findAccessibleSync('test', dir, candidates)
-  t.strictEqual(found, undefined)
+  t.equal(found, undefined)
 })
 
 test('find accessible - single item array, readable', function (t) {
@@ -40,7 +40,7 @@ test('find accessible - single item array, readable', function (t) {
 
   const candidates = [readableFile]
   const found = configure.test.findAccessibleSync('test', dir, candidates)
-  t.strictEqual(found, path.resolve(dir, readableFile))
+  t.equal(found, path.resolve(dir, readableFile))
 })
 
 test('find accessible - single item array, readable in subdir', function (t) {
@@ -48,7 +48,7 @@ test('find accessible - single item array, readable in subdir', function (t) {
 
   const candidates = [readableFileInDir]
   const found = configure.test.findAccessibleSync('test', dir, candidates)
-  t.strictEqual(found, path.resolve(dir, readableFileInDir))
+  t.equal(found, path.resolve(dir, readableFileInDir))
 })
 
 test('find accessible - single item array, unreadable', function (t) {
@@ -56,7 +56,7 @@ test('find accessible - single item array, unreadable', function (t) {
 
   const candidates = ['unreadable_file']
   const found = configure.test.findAccessibleSync('test', dir, candidates)
-  t.strictEqual(found, undefined)
+  t.equal(found, undefined)
 })
 
 test('find accessible - multi item array, no matches', function (t) {
@@ -64,7 +64,7 @@ test('find accessible - multi item array, no matches', function (t) {
 
   const candidates = ['non_existent_file', 'unreadable_file']
   const found = configure.test.findAccessibleSync('test', dir, candidates)
-  t.strictEqual(found, undefined)
+  t.equal(found, undefined)
 })
 
 test('find accessible - multi item array, single match', function (t) {
@@ -72,7 +72,7 @@ test('find accessible - multi item array, single match', function (t) {
 
   const candidates = ['non_existent_file', readableFile]
   const found = configure.test.findAccessibleSync('test', dir, candidates)
-  t.strictEqual(found, path.resolve(dir, readableFile))
+  t.equal(found, path.resolve(dir, readableFile))
 })
 
 test('find accessible - multi item array, return first match', function (t) {
@@ -80,5 +80,5 @@ test('find accessible - multi item array, return first match', function (t) {
 
   const candidates = ['non_existent_file', anotherReadableFile, readableFile]
   const found = configure.test.findAccessibleSync('test', dir, candidates)
-  t.strictEqual(found, path.resolve(dir, anotherReadableFile))
+  t.equal(found, path.resolve(dir, anotherReadableFile))
 })

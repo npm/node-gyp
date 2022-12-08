@@ -7,7 +7,7 @@ const childProcess = require('child_process')
 const os = require('os')
 const addonPath = path.resolve(__dirname, 'node_modules', 'hello_world')
 const nodeGyp = path.resolve(__dirname, '..', 'bin', 'node-gyp.js')
-const execFileSync = childProcess.execFileSync || require('./process-exec-sync')
+const execFileSync = childProcess.execFileSync
 const execFile = childProcess.execFile
 
 function runHello (hostProcess) {
@@ -43,9 +43,9 @@ test('build simple addon', function (t) {
   const proc = execFile(process.execPath, cmd, function (err, stdout, stderr) {
     const logLines = stderr.toString().trim().split(/\r?\n/)
     const lastLine = logLines[logLines.length - 1]
-    t.strictEqual(err, null)
-    t.strictEqual(lastLine, 'gyp info ok', 'should end in ok')
-    t.strictEqual(runHello().trim(), 'world')
+    t.equal(err, null)
+    t.equal(lastLine, 'gyp info ok', 'should end in ok')
+    t.equal(runHello().trim(), 'world')
   })
   proc.stdout.setEncoding('utf-8')
   proc.stderr.setEncoding('utf-8')
@@ -115,22 +115,15 @@ test('build simple addon in path with non-ascii characters', function (t) {
 
     const logLines = stderr.toString().trim().split(/\r?\n/)
     const lastLine = logLines[logLines.length - 1]
-    t.strictEqual(err, null)
-    t.strictEqual(lastLine, 'gyp info ok', 'should end in ok')
-    t.strictEqual(runHello().trim(), 'world')
+    t.equal(err, null)
+    t.equal(lastLine, 'gyp info ok', 'should end in ok')
+    t.equal(runHello().trim(), 'world')
   })
   proc.stdout.setEncoding('utf-8')
   proc.stderr.setEncoding('utf-8')
 })
 
 test('addon works with renamed host executable', function (t) {
-  // No `fs.copyFileSync` before node8.
-  if (process.version.substr(1).split('.')[0] < 8) {
-    t.skip('skipping test for old node version')
-    t.end()
-    return
-  }
-
   t.plan(3)
 
   const notNodePath = path.join(os.tmpdir(), 'notnode' + path.extname(process.execPath))
@@ -140,9 +133,9 @@ test('addon works with renamed host executable', function (t) {
   const proc = execFile(process.execPath, cmd, function (err, stdout, stderr) {
     const logLines = stderr.toString().trim().split(/\r?\n/)
     const lastLine = logLines[logLines.length - 1]
-    t.strictEqual(err, null)
-    t.strictEqual(lastLine, 'gyp info ok', 'should end in ok')
-    t.strictEqual(runHello(notNodePath).trim(), 'world')
+    t.equal(err, null)
+    t.equal(lastLine, 'gyp info ok', 'should end in ok')
+    t.equal(runHello(notNodePath).trim(), 'world')
     fs.unlinkSync(notNodePath)
   })
   proc.stdout.setEncoding('utf-8')

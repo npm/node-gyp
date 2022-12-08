@@ -66,5 +66,5 @@ test('config.gypi parsing', function (t) {
 
   const str = "# Some comments\n{'variables': {'multiline': 'A'\n'B'}}"
   const config = parseConfigGypi(str)
-  t.deepEqual(config, { variables: { multiline: 'AB' } })
+  t.same(config, { variables: { multiline: 'AB' } })
 })

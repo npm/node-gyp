@@ -11,11 +11,11 @@ test('find python', function (t) {
   t.plan(4)
 
   findPython.test.findPython(null, function (err, found) {
-    t.strictEqual(err, null)
+    t.equal(err, null)
     const proc = execFile(found, ['-V'], function (err, stdout, stderr) {
-      t.strictEqual(err, null)
+      t.equal(err, null)
       t.ok(/Python 3/.test(stdout))
-      t.strictEqual(stderr, '')
+      t.equal(stderr, '')
     })
     proc.stdout.setEncoding('utf-8')
     proc.stderr.setEncoding('utf-8')
@@ -49,11 +49,11 @@ test('find python - python', function (t) {
   f.execFile = function (program, args, opts, cb) {
     f.execFile = function (program, args, opts, cb) {
       poison(f, 'execFile')
-      t.strictEqual(program, '/path/python')
+      t.equal(program, '/path/python')
       t.ok(/sys\.version_info/.test(args[1]))
       cb(null, '3.9.1')
     }
-    t.strictEqual(program,
+    t.equal(program,
       process.platform === 'win32' ? '"python"' : 'python')
     t.ok(/sys\.executable/.test(args[1]))
     cb(null, '/path/python')
@@ -61,8 +61,8 @@ test('find python - python', function (t) {
   f.findPython()
 
   function done (err, python) {
-    t.strictEqual(err, null)
-    t.strictEqual(python, '/path/python')
+    t.equal(err, null)
+    t.equal(python, '/path/python')
   }
 })
 
@@ -138,8 +138,8 @@ test('find python - no python, use python launcher', function (t) {
 
   f.execFile = function (program, args, opts, cb) {
     if (program === 'py.exe') {
-      t.notEqual(args.indexOf('-3'), -1)
-      t.notEqual(args.indexOf('-c'), -1)
+      t.not(args.indexOf('-3'), -1)
+      t.not(args.indexOf('-c'), -1)
       return cb(null, 'Z:\\snake.exe')
     }
     if (/sys\.executable/.test(args[args.length - 1])) {
@@ -159,8 +159,8 @@ test('find python - no python, use python launcher', function (t) {
   f.findPython()
 
   function done (err, python) {
-    t.strictEqual(err, null)
-    t.strictEqual(python, 'Z:\\snake.exe')
+    t.equal(err, null)
+    t.equal(python, 'Z:\\snake.exe')
   }
 })
 
@@ -187,7 +187,7 @@ test('find python - no python, no python launcher, good guess', function (t) {
   f.findPython()
 
   function done (err, python) {
-    t.strictEqual(err, null)
+    t.equal(err, null)
     t.ok(python === expectedProgram)
   }
 })
