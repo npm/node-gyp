@@ -26,14 +26,6 @@ function poison (object, property) {
 
 function TestVisualStudioFinder () { VisualStudioFinder.apply(this, arguments) }
 TestVisualStudioFinder.prototype = Object.create(VisualStudioFinder.prototype)
-// Silence npmlog - remove for debugging
-TestVisualStudioFinder.prototype.log = {
-  silly: () => {},
-  verbose: () => {},
-  info: () => {},
-  warn: () => {},
-  error: () => {}
-}
 
 test('VS2013', function (t) {
   t.plan(4)

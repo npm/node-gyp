@@ -7,8 +7,6 @@ const findPython = require('../lib/find-python')
 const execFile = require('child_process').execFile
 const PythonFinder = findPython.test.PythonFinder
 
-require('npmlog').level = 'warn'
-
 test('find python', function (t) {
   t.plan(4)
 
@@ -42,14 +40,6 @@ function TestPythonFinder () {
   PythonFinder.apply(this, arguments)
 }
 TestPythonFinder.prototype = Object.create(PythonFinder.prototype)
-// Silence npmlog - remove for debugging
-TestPythonFinder.prototype.log = {
-  silly: () => {},
-  verbose: () => {},
-  info: () => {},
-  warn: () => {},
-  error: () => {}
-}
 delete TestPythonFinder.prototype.env.NODE_GYP_FORCE_PYTHON
 
 test('find python - python', function (t) {

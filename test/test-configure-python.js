@@ -4,6 +4,7 @@ const test = require('tap').test
 const path = require('path')
 const devDir = require('./common').devDir()
 const gyp = require('../lib/node-gyp')
+const log = require('../lib/log')
 const requireInject = require('require-inject')
 const configure = requireInject('../lib/configure', {
   'graceful-fs': {
@@ -20,11 +21,11 @@ const configure = requireInject('../lib/configure', {
   }
 })
 
+log.logger.stream = null
+
 const EXPECTED_PYPATH = path.join(__dirname, '..', 'gyp', 'pylib')
 const SEPARATOR = process.platform === 'win32' ? ';' : ':'
 const SPAWN_RESULT = { on: function () { } }
-
-require('npmlog').level = 'warn'
 
 test('configure PYTHONPATH with no existing env', function (t) {
   t.plan(1)

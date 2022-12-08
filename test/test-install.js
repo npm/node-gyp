@@ -2,9 +2,6 @@
 
 const { test } = require('tap')
 const { test: { install } } = require('../lib/install')
-const log = require('npmlog')
-
-log.level = 'error' // we expect a warning
 
 test('EACCES retry once', async (t) => {
   t.plan(3)

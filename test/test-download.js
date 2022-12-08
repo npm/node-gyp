@@ -11,10 +11,10 @@ const semver = require('semver')
 const devDir = require('./common').devDir()
 const rimraf = require('rimraf')
 const gyp = require('../lib/node-gyp')
-const log = require('npmlog')
+const log = require('../lib/log')
 const certs = require('./fixtures/certs')
 
-log.level = 'warn'
+log.logger.stream = null
 
 test('download over http', async (t) => {
   t.plan(2)
@@ -184,7 +184,6 @@ test('download headers (actual)', async (t) => {
   const prog = gyp()
   prog.parseArgv([])
   prog.devDir = devDir
-  log.level = 'warn'
   await util.promisify(install)(prog, [])
 
   const data = await fs.promises.readFile(path.join(expectedDir, 'installVersion'), 'utf8')
