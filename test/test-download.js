@@ -50,7 +50,7 @@ test('download over https with custom ca', async (t) => {
 
   t.strictEqual(ca.length, 1)
 
-  const options = { ca: ca, cert: cert, key: key }
+  const options = { ca, cert, key }
   const server = https.createServer(options, (req, res) => {
     t.strictEqual(req.headers['user-agent'], `node-gyp v42 (node ${process.version})`)
     res.end('ok')

@@ -12,7 +12,7 @@ test('find python', function (t) {
 
   findPython.test.findPython(null, function (err, found) {
     t.strictEqual(err, null)
-    var proc = execFile(found, ['-V'], function (err, stdout, stderr) {
+    const proc = execFile(found, ['-V'], function (err, stdout, stderr) {
       t.strictEqual(err, null)
       t.ok(/Python 3/.test(stdout))
       t.strictEqual(stderr, '')
@@ -27,7 +27,7 @@ function poison (object, property) {
     console.error(Error(`Property ${property} should not have been accessed.`))
     process.abort()
   }
-  var descriptor = {
+  const descriptor = {
     configurable: false,
     enumerable: false,
     get: fail,
@@ -45,7 +45,7 @@ delete TestPythonFinder.prototype.env.NODE_GYP_FORCE_PYTHON
 test('find python - python', function (t) {
   t.plan(6)
 
-  var f = new TestPythonFinder('python', done)
+  const f = new TestPythonFinder('python', done)
   f.execFile = function (program, args, opts, cb) {
     f.execFile = function (program, args, opts, cb) {
       poison(f, 'execFile')
@@ -69,7 +69,7 @@ test('find python - python', function (t) {
 test('find python - python too old', function (t) {
   t.plan(2)
 
-  var f = new TestPythonFinder(null, done)
+  const f = new TestPythonFinder(null, done)
   f.execFile = function (program, args, opts, cb) {
     if (/sys\.executable/.test(args[args.length - 1])) {
       cb(null, '/path/python')
@@ -90,7 +90,7 @@ test('find python - python too old', function (t) {
 test('find python - no python', function (t) {
   t.plan(2)
 
-  var f = new TestPythonFinder(null, done)
+  const f = new TestPythonFinder(null, done)
   f.execFile = function (program, args, opts, cb) {
     if (/sys\.executable/.test(args[args.length - 1])) {
       cb(new Error('not found'))
@@ -111,7 +111,7 @@ test('find python - no python', function (t) {
 test('find python - no python2, no python, unix', function (t) {
   t.plan(2)
 
-  var f = new TestPythonFinder(null, done)
+  const f = new TestPythonFinder(null, done)
   f.checkPyLauncher = t.fail
   f.win = false
 
@@ -133,7 +133,7 @@ test('find python - no python2, no python, unix', function (t) {
 test('find python - no python, use python launcher', function (t) {
   t.plan(4)
 
-  var f = new TestPythonFinder(null, done)
+  const f = new TestPythonFinder(null, done)
   f.win = true
 
   f.execFile = function (program, args, opts, cb) {
@@ -167,7 +167,7 @@ test('find python - no python, use python launcher', function (t) {
 test('find python - no python, no python launcher, good guess', function (t) {
   t.plan(2)
 
-  var f = new TestPythonFinder(null, done)
+  const f = new TestPythonFinder(null, done)
   f.win = true
   const expectedProgram = f.winDefaultLocations[0]
 
@@ -195,7 +195,7 @@ test('find python - no python, no python launcher, good guess', function (t) {
 test('find python - no python, no python launcher, bad guess', function (t) {
   t.plan(2)
 
-  var f = new TestPythonFinder(null, done)
+  const f = new TestPythonFinder(null, done)
   f.win = true
 
   f.execFile = function (program, args, opts, cb) {

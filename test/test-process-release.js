@@ -6,7 +6,7 @@ const processRelease = require('../lib/process-release')
 test('test process release - process.version = 0.8.20', function (t) {
   t.plan(2)
 
-  var release = processRelease([], { opts: {} }, 'v0.8.20', null)
+  const release = processRelease([], { opts: {} }, 'v0.8.20', null)
 
   t.equal(release.semver.version, '0.8.20')
   delete release.semver
@@ -27,7 +27,7 @@ test('test process release - process.version = 0.8.20', function (t) {
 test('test process release - process.version = 0.10.21', function (t) {
   t.plan(2)
 
-  var release = processRelease([], { opts: {} }, 'v0.10.21', null)
+  const release = processRelease([], { opts: {} }, 'v0.10.21', null)
 
   t.equal(release.semver.version, '0.10.21')
   delete release.semver
@@ -49,7 +49,7 @@ test('test process release - process.version = 0.10.21', function (t) {
 test('test process release - process.version = 0.12.9', function (t) {
   t.plan(2)
 
-  var release = processRelease([], { opts: {} }, 'v0.12.9', null)
+  const release = processRelease([], { opts: {} }, 'v0.12.9', null)
 
   t.equal(release.semver.version, '0.12.9')
   delete release.semver
@@ -71,7 +71,7 @@ test('test process release - process.version = 0.12.9', function (t) {
 test('test process release - process.version = 0.10.41', function (t) {
   t.plan(2)
 
-  var release = processRelease([], { opts: {} }, 'v0.10.41', null)
+  const release = processRelease([], { opts: {} }, 'v0.10.41', null)
 
   t.equal(release.semver.version, '0.10.41')
   delete release.semver
@@ -93,7 +93,7 @@ test('test process release - process.version = 0.10.41', function (t) {
 test('test process release - process.release ~ node@0.10.42', function (t) {
   t.plan(2)
 
-  var release = processRelease([], { opts: {} }, 'v0.10.42', null)
+  const release = processRelease([], { opts: {} }, 'v0.10.42', null)
 
   t.equal(release.semver.version, '0.10.42')
   delete release.semver
@@ -115,7 +115,7 @@ test('test process release - process.release ~ node@0.10.42', function (t) {
 test('test process release - process.release ~ node@0.12.10', function (t) {
   t.plan(2)
 
-  var release = processRelease([], { opts: {} }, 'v0.12.10', null)
+  const release = processRelease([], { opts: {} }, 'v0.12.10', null)
 
   t.equal(release.semver.version, '0.12.10')
   delete release.semver
@@ -136,7 +136,7 @@ test('test process release - process.release ~ node@0.12.10', function (t) {
 test('test process release - process.release ~ node@4.1.23', function (t) {
   t.plan(2)
 
-  var release = processRelease([], { opts: {} }, 'v4.1.23', {
+  const release = processRelease([], { opts: {} }, 'v4.1.23', {
     name: 'node',
     headersUrl: 'https://nodejs.org/dist/v4.1.23/node-v4.1.23-headers.tar.gz'
   })
@@ -160,7 +160,7 @@ test('test process release - process.release ~ node@4.1.23', function (t) {
 test('test process release - process.release ~ node@4.1.23 / corp build', function (t) {
   t.plan(2)
 
-  var release = processRelease([], { opts: {} }, 'v4.1.23', {
+  const release = processRelease([], { opts: {} }, 'v4.1.23', {
     name: 'node',
     headersUrl: 'https://some.custom.location/node-v4.1.23-headers.tar.gz'
   })
@@ -184,7 +184,7 @@ test('test process release - process.release ~ node@4.1.23 / corp build', functi
 test('test process release - process.release ~ node@12.8.0 Windows', function (t) {
   t.plan(2)
 
-  var release = processRelease([], { opts: {} }, 'v12.8.0', {
+  const release = processRelease([], { opts: {} }, 'v12.8.0', {
     name: 'node',
     sourceUrl: 'https://nodejs.org/download/release/v12.8.0/node-v12.8.0.tar.gz',
     headersUrl: 'https://nodejs.org/download/release/v12.8.0/node-v12.8.0-headers.tar.gz',
@@ -210,7 +210,7 @@ test('test process release - process.release ~ node@12.8.0 Windows', function (t
 test('test process release - process.release ~ node@12.8.0 Windows ARM64', function (t) {
   t.plan(2)
 
-  var release = processRelease([], { opts: {} }, 'v12.8.0', {
+  const release = processRelease([], { opts: {} }, 'v12.8.0', {
     name: 'node',
     sourceUrl: 'https://unofficial-builds.nodejs.org/download/release/v12.8.0/node-v12.8.0.tar.gz',
     headersUrl: 'https://unofficial-builds.nodejs.org/download/release/v12.8.0/node-v12.8.0-headers.tar.gz',
@@ -236,7 +236,7 @@ test('test process release - process.release ~ node@12.8.0 Windows ARM64', funct
 test('test process release - process.release ~ node@4.1.23 --target=0.10.40', function (t) {
   t.plan(2)
 
-  var release = processRelease([], { opts: { target: '0.10.40' } }, 'v4.1.23', {
+  const release = processRelease([], { opts: { target: '0.10.40' } }, 'v4.1.23', {
     name: 'node',
     headersUrl: 'https://nodejs.org/dist/v4.1.23/node-v4.1.23-headers.tar.gz'
   })
@@ -260,7 +260,7 @@ test('test process release - process.release ~ node@4.1.23 --target=0.10.40', fu
 test('test process release - process.release ~ node@4.1.23 --dist-url=https://foo.bar/baz', function (t) {
   t.plan(2)
 
-  var release = processRelease([], { opts: { 'dist-url': 'https://foo.bar/baz' } }, 'v4.1.23', {
+  const release = processRelease([], { opts: { 'dist-url': 'https://foo.bar/baz' } }, 'v4.1.23', {
     name: 'node',
     headersUrl: 'https://nodejs.org/dist/v4.1.23/node-v4.1.23-headers.tar.gz'
   })
@@ -284,7 +284,7 @@ test('test process release - process.release ~ node@4.1.23 --dist-url=https://fo
 test('test process release - process.release ~ frankenstein@4.1.23', function (t) {
   t.plan(2)
 
-  var release = processRelease([], { opts: {} }, 'v4.1.23', {
+  const release = processRelease([], { opts: {} }, 'v4.1.23', {
     name: 'frankenstein',
     headersUrl: 'https://frankensteinjs.org/dist/v4.1.23/frankenstein-v4.1.23-headers.tar.gz'
   })
@@ -308,7 +308,7 @@ test('test process release - process.release ~ frankenstein@4.1.23', function (t
 test('test process release - process.release ~ frankenstein@4.1.23 --dist-url=http://foo.bar/baz/', function (t) {
   t.plan(2)
 
-  var release = processRelease([], { opts: { 'dist-url': 'http://foo.bar/baz/' } }, 'v4.1.23', {
+  const release = processRelease([], { opts: { 'dist-url': 'http://foo.bar/baz/' } }, 'v4.1.23', {
     name: 'frankenstein',
     headersUrl: 'https://frankensteinjs.org/dist/v4.1.23/frankenstein-v4.1.23.tar.gz'
   })
@@ -332,7 +332,7 @@ test('test process release - process.release ~ frankenstein@4.1.23 --dist-url=ht
 test('test process release - process.release ~ node@4.0.0-rc.4', function (t) {
   t.plan(2)
 
-  var release = processRelease([], { opts: {} }, 'v4.0.0-rc.4', {
+  const release = processRelease([], { opts: {} }, 'v4.0.0-rc.4', {
     name: 'node',
     headersUrl: 'https://nodejs.org/download/rc/v4.0.0-rc.4/node-v4.0.0-rc.4-headers.tar.gz'
   })
@@ -358,7 +358,7 @@ test('test process release - process.release ~ node@4.0.0-rc.4 passed as argv[0]
 
   // note the missing 'v' on the arg, it should normalise when checking
   // whether we're on the default or not
-  var release = processRelease(['4.0.0-rc.4'], { opts: {} }, 'v4.0.0-rc.4', {
+  const release = processRelease(['4.0.0-rc.4'], { opts: {} }, 'v4.0.0-rc.4', {
     name: 'node',
     headersUrl: 'https://nodejs.org/download/rc/v4.0.0-rc.4/node-v4.0.0-rc.4-headers.tar.gz'
   })
@@ -384,7 +384,7 @@ test('test process release - process.release ~ node@4.0.0-rc.4 - bogus string pa
 
   // additional arguments can be passed in on the commandline that should be ignored if they
   // are not specifying a valid version @ position 0
-  var release = processRelease(['this is no version!'], { opts: {} }, 'v4.0.0-rc.4', {
+  const release = processRelease(['this is no version!'], { opts: {} }, 'v4.0.0-rc.4', {
     name: 'node',
     headersUrl: 'https://nodejs.org/download/rc/v4.0.0-rc.4/node-v4.0.0-rc.4-headers.tar.gz'
   })
@@ -410,7 +410,7 @@ test('test process release - NODEJS_ORG_MIRROR', function (t) {
 
   process.env.NODEJS_ORG_MIRROR = 'http://foo.bar'
 
-  var release = processRelease([], { opts: {} }, 'v4.1.23', {
+  const release = processRelease([], { opts: {} }, 'v4.1.23', {
     name: 'node',
     headersUrl: 'https://nodejs.org/dist/v4.1.23/node-v4.1.23-headers.tar.gz'
   })

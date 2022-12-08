@@ -15,7 +15,7 @@ function poison (object, property) {
     console.error(Error(`Property ${property} should not have been accessed.`))
     process.abort()
   }
-  var descriptor = {
+  const descriptor = {
     configurable: false,
     enumerable: false,
     get: fail,
@@ -48,7 +48,7 @@ test('VS2013', function (t) {
     finder.parseData(new Error(), '', '', cb)
   }
   finder.regSearchKeys = (keys, value, addOpts, cb) => {
-    for (var i = 0; i < keys.length; ++i) {
+    for (let i = 0; i < keys.length; ++i) {
       const fullName = `${keys[i]}\\${value}`
       switch (fullName) {
         case 'HKLM\\Software\\Microsoft\\VisualStudio\\SxS\\VC7\\14.0':
@@ -87,7 +87,7 @@ test('VS2013 should not be found on new node versions', function (t) {
     finder.parseData(null, data, '', cb)
   }
   finder.regSearchKeys = (keys, value, addOpts, cb) => {
-    for (var i = 0; i < keys.length; ++i) {
+    for (let i = 0; i < keys.length; ++i) {
       const fullName = `${keys[i]}\\${value}`
       switch (fullName) {
         case 'HKLM\\Software\\Microsoft\\VisualStudio\\SxS\\VC7\\14.0':
@@ -123,7 +123,7 @@ test('VS2015', function (t) {
     finder.parseData(new Error(), '', '', cb)
   }
   finder.regSearchKeys = (keys, value, addOpts, cb) => {
-    for (var i = 0; i < keys.length; ++i) {
+    for (let i = 0; i < keys.length; ++i) {
       const fullName = `${keys[i]}\\${value}`
       switch (fullName) {
         case 'HKLM\\Software\\Microsoft\\VisualStudio\\SxS\\VC7\\14.0':
@@ -424,7 +424,7 @@ function allVsVersions (t, finder) {
     finder.parseData(null, data, '', cb)
   }
   finder.regSearchKeys = (keys, value, addOpts, cb) => {
-    for (var i = 0; i < keys.length; ++i) {
+    for (let i = 0; i < keys.length; ++i) {
       const fullName = `${keys[i]}\\${value}`
       switch (fullName) {
         case 'HKLM\\Software\\Microsoft\\VisualStudio\\SxS\\VC7\\14.0':
