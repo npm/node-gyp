@@ -9,7 +9,6 @@ const https = require('https')
 const install = require('../lib/install')
 const semver = require('semver')
 const devDir = require('./fixtures/common').devDir()
-const rimraf = require('rimraf')
 const gyp = require('../lib/node-gyp')
 const log = require('../lib/log')
 const certs = require('./fixtures/certs')
@@ -179,7 +178,7 @@ test('download headers (actual)', async (t) => {
   t.plan(12)
 
   const expectedDir = path.join(devDir, process.version.replace(/^v/, ''))
-  await util.promisify(rimraf)(expectedDir)
+  await fs.promises.rm(expectedDir, { recursive: true, force: true })
 
   const prog = gyp()
   prog.parseArgv([])
