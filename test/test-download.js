@@ -1,7 +1,7 @@
 'use strict'
 
 const { test } = require('tap')
-const fs = require('fs')
+const fs = require('fs/promises')
 const path = require('path')
 const util = require('util')
 const http = require('http')
@@ -44,7 +44,7 @@ test('download over https with custom ca', async (t) => {
   const cacontents = certs['ca.crt']
   const cert = certs['server.crt']
   const key = certs['server.key']
-  await fs.promises.writeFile(cafile, cacontents, 'utf8')
+  await fs.writeFile(cafile, cacontents, 'utf8')
   const ca = await install.test.readCAFile(cafile)
 
   t.equal(ca.length, 1)
@@ -57,7 +57,7 @@ test('download over https with custom ca', async (t) => {
 
   t.teardown(async () => {
     await new Promise((resolve) => server.close(resolve))
-    await fs.promises.unlink(cafile)
+    await fs.unlink(cafile)
   })
 
   server.on('clientError', (err) => { throw err })
@@ -155,9 +155,9 @@ test('download with missing cafile', async (t) => {
 test('check certificate splitting', async (t) => {
   const cafile = path.join(__dirname, 'fixtures/ca-bundle.crt')
   const cacontents = certs['ca-bundle.crt']
-  await fs.promises.writeFile(cafile, cacontents, 'utf8')
+  await fs.writeFile(cafile, cacontents, 'utf8')
   t.teardown(async () => {
-    await fs.promises.unlink(cafile)
+    await fs.unlink(cafile)
   })
   const cas = await install.test.readCAFile(path.join(__dirname, 'fixtures/ca-bundle.crt'))
   t.plan(2)
@@ -178,17 +178,17 @@ test('download headers (actual)', async (t) => {
   t.plan(12)
 
   const expectedDir = path.join(devDir, process.version.replace(/^v/, ''))
-  await fs.promises.rm(expectedDir, { recursive: true, force: true })
+  await fs.rm(expectedDir, { recursive: true, force: true })
 
   const prog = gyp()
   prog.parseArgv([])
   prog.devDir = devDir
   await util.promisify(install)(prog, [])
 
-  const data = await fs.promises.readFile(path.join(expectedDir, 'installVersion'), 'utf8')
+  const data = await fs.readFile(path.join(expectedDir, 'installVersion'), 'utf8')
   t.equal(data, '9\n', 'correct installVersion')
 
-  const list = await fs.promises.readdir(path.join(expectedDir, 'include/node'))
+  const list = await fs.readdir(path.join(expectedDir, 'include/node'))
   t.ok(list.includes('common.gypi'))
   t.ok(list.includes('config.gypi'))
   t.ok(list.includes('node.h'))
@@ -200,7 +200,7 @@ test('download headers (actual)', async (t) => {
   t.ok(list.includes('v8.h'))
   t.ok(list.includes('zlib.h'))
 
-  const lines = (await fs.promises.readFile(path.join(expectedDir, 'include/node/node_version.h'), 'utf8')).split('\n')
+  const lines = (await fs.readFile(path.join(expectedDir, 'include/node/node_version.h'), 'utf8')).split('\n')
 
   // extract the 3 version parts from the defines to build a valid version string and
   // and check them against our current env version
