@@ -1,5 +1,14 @@
 # Changelog
 
+## [5.0.0](https://github.com/npm/node-gyp/compare/v4.0.0...v5.0.0) (2025-10-22)
+### ⚠️ BREAKING CHANGES
+* `@npmcli/node-gyp` now supports node `^20.17.0 || >=22.9.0`
+### Bug Fixes
+* [`09083f4`](https://github.com/npm/node-gyp/commit/09083f4ddd9b108e9b54fe4f3c838bbc2e9c42f4) [#97](https://github.com/npm/node-gyp/pull/97) align to npm 11 node engine range (#97) (@owlstronaut)
+### Chores
+* [`c614399`](https://github.com/npm/node-gyp/commit/c6143993b0ed226ed5831ca79545c7217f31e6a9) [#91](https://github.com/npm/node-gyp/pull/91) postinstall workflow updates (#91) (@owlstronaut)
+* [`a35d623`](https://github.com/npm/node-gyp/commit/a35d6238fb40ea8efe7c50a4ad661fc0cc805a85) [#96](https://github.com/npm/node-gyp/pull/96) bump @npmcli/template-oss from 4.26.0 to 4.27.1 (#96) (@dependabot[bot], @npm-cli-bot)
+
 ## [4.0.0](https://github.com/npm/node-gyp/compare/v3.0.0...v4.0.0) (2024-09-24)
 ### ⚠️ BREAKING CHANGES
 * `@npmcli/node-gyp` now supports node `^18.17.0 || >=20.5.0`
