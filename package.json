@@ -1,6 +1,6 @@
 {
   "name": "@npmcli/node-gyp",
-  "version": "4.0.0",
+  "version": "5.0.0",
   "description": "Tools for dealing with node-gyp packages",
   "scripts": {
     "test": "tap",
