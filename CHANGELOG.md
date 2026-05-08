@@ -1,5 +1,17 @@
 # Changelog
 
+## [6.0.0](https://github.com/npm/node-gyp/compare/v5.0.0...v6.0.0) (2026-05-08)
+### ⚠️ BREAKING CHANGES
+* `@npmcli/node-gyp` now supports node `^22.22.2 || ^24.15.0 || >=26.0.0`
+* template-oss-apply
+### Features
+* [`6e21af3`](https://github.com/npm/node-gyp/commit/6e21af36e1ac5312512eb9e0cf8e243941d801c4) [#106](https://github.com/npm/node-gyp/pull/106) bump to new node engine range (@owlstronaut)
+* [`8577e03`](https://github.com/npm/node-gyp/commit/8577e0383397cc6c36f8f0b061e1016f84e32406) [#106](https://github.com/npm/node-gyp/pull/106) template-oss-apply (@owlstronaut)
+### Chores
+* [`dd5b766`](https://github.com/npm/node-gyp/commit/dd5b7667b47d43edf4eb894d064474f0bfb407ff) [#106](https://github.com/npm/node-gyp/pull/106) template-oss-apply (@owlstronaut)
+* [`f70b277`](https://github.com/npm/node-gyp/commit/f70b2774d09a29cb6f40b3d816cb70e675776672) [#99](https://github.com/npm/node-gyp/pull/99) bump @npmcli/eslint-config from 5.1.0 to 6.0.0 (#99) (@dependabot[bot])
+* [`47fac39`](https://github.com/npm/node-gyp/commit/47fac397d7eb40a4fa3fb14b06ff0114fa6fc2f0) [#104](https://github.com/npm/node-gyp/pull/104) bump @npmcli/template-oss from 4.29.0 to 4.30.0 (#104) (@dependabot[bot], @npm-cli-bot)
+
 ## [5.0.0](https://github.com/npm/node-gyp/compare/v4.0.0...v5.0.0) (2025-10-22)
 ### ⚠️ BREAKING CHANGES
 * `@npmcli/node-gyp` now supports node `^20.17.0 || >=22.9.0`
